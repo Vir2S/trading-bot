@@ -42,3 +42,54 @@ class Robot():
         td_client.login()
 
         return td_client
+
+    @property
+    def pre_market_open(self) -> bool:
+
+        pre_market_start_time = datetime.now().replace(hour=12, minute=00, second=00, tzinfo=timezone.utc).timestamp()
+        market_start_time = datetime.now().replace(hour=13, minute=30, second=00, tzinfo=timezone.utc).timestamp()
+        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+
+        if market_start_time >= right_now >= pre_market_start_time:
+            return True
+        else:
+            return False
+
+    @property
+    def post_market_open(self) -> bool:
+
+        post_market_end_time = datetime.now().replace(hour=22, minute=30, second=00, tzinfo=timezone.utc).timestamp()
+        market_end_time = datetime.now().replace(hour=20, minute=00, second=00, tzinfo=timezone.utc).timestamp()
+        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+
+        if market_end_time >= right_now >= post_market_end_time:
+            return True
+        else:
+            return False
+
+    @property
+    def regular_market_open(self) -> bool:
+
+        market_start_time = datetime.now().replace(hour=13, minute=30, second=00, tzinfo=timezone.utc).timestamp()
+        market_end_time = datetime.now().replace(hour=20, minute=00, second=00, tzinfo=timezone.utc).timestamp()
+        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+
+        if market_end_time >= right_now >= market_start_time:
+            return True
+        else:
+            return False
+
+    def create_portfolio(self):
+        pass
+
+    def create_trade(self):
+        pass
+
+    def create_stock_frame(self):
+        pass
+
+    def grab_current_quotes(self) -> dict:
+        pass
+
+    def grab_historical_prices(self) -> List[Dict]:
+        pass
