@@ -67,3 +67,14 @@ class Robot():
         else:
             return False
 
+    @property
+    def regular_market_open(self) -> bool:
+
+        market_start_time = datetime.now().replace(hour=13, minute=30, second=00, tzinfo=timezone.utc).timestamp()
+        market_end_time = datetime.now().replace(hour=20, minute=00, second=00, tzinfo=timezone.utc).timestamp()
+        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+
+        if market_end_time >= right_now >= market_start_time:
+            return True
+        else:
+            return False
