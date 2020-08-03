@@ -59,3 +59,13 @@ class Portfolio():
             return True
         else:
             return False
+
+    def is_profitable(self, symbol: str, current_price: float) -> bool:
+
+        # Grab the purchase_price
+        purchase_price = self.positions[symbol]['purchase_price']
+
+        if purchase_price <= current_price:
+            return True
+        elif purchase_price > current_price:
+            return False
