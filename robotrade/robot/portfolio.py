@@ -50,6 +50,12 @@ class Portfolio():
         if symbol in self.positions:
             del self.positions[symbol]
             return (True, '{Symbol} was successfully removed.'.format(symbol=symbol))
-
         else:
             return (False, '{Symbol} did not exists in portfolio.'.format(symbol=symbol))
+
+    def in_portfolio(self, symbol: str) -> bool:
+
+        if symbol in self.positions:
+            return True
+        else:
+            return False
