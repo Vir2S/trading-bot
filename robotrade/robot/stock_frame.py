@@ -57,4 +57,8 @@ class StockFrame():
 
         return price_df
 
+    def _set_multi_index(self, price_df: pd.DataFrame) -> pd.DataFrame:
 
+        price_df = price_df.set_index(keys=['symbol', 'datetime'])
+
+        return price_df
