@@ -40,3 +40,9 @@ class Indicators():
     def price_data_frame(self) -> pd.DataFrame:
 
         return self._frame
+
+    @price_data_frame.setter
+    def price_data_frame(self, price_data_frame: pd.DataFrame) -> None:
+
+        self._frame = price_data_frame
+
