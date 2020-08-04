@@ -50,3 +50,11 @@ class StockFrame():
         price_df = self._set_multi_index(price=price_df)
 
         return price_df
+
+    def _parse_datetime_column(self, price_df: pd.DataFrame) -> pd.DataFrame:
+
+        price_df['datetime'] = pd.to_datetime(price_df['datetime'], unit='ms', origin='unix')
+
+        return price_df
+
+
