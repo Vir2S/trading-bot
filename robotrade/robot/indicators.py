@@ -29,3 +29,9 @@ class Indicators():
         self._indicator_signals[indicator]['buy_operator'] = condition_buy
         self._indicator_signals[indicator]['sell_operator'] = condition_sell
 
+    def get_indicator_signals(self, indicator: Optional[str]) -> Dict:
+
+        if indicator and indicator in self._indicator_signals:
+            return self._indicator_signals[indicator]
+        else:
+            return self._indicator_signals
