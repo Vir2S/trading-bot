@@ -35,3 +35,8 @@ class Indicators():
             return self._indicator_signals[indicator]
         else:
             return self._indicator_signals
+
+    @property
+    def price_data_frame(self) -> pd.DataFrame:
+
+        return self._frame
