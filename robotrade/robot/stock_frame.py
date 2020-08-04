@@ -93,3 +93,10 @@ class StockFrame():
             # Add the row
             self.frame.loc[row_id, column_names] = new_row.values
             self.frame.sort_index(inplace=True)
+
+    def do_indicators_exist(self, column_names: List[str]) -> bool:
+        pass
+
+    def _check_signals(self, indicators: Dict) -> Union[pd.Series, None]:
+        pass
+
