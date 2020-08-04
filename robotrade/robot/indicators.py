@@ -46,3 +46,16 @@ class Indicators():
 
         self._frame = price_data_frame
 
+    def change_in_price(self) -> pd.DataFrame:
+
+        locals_data = locals()
+        del locals_data['self']
+
+        column_name = 'change_in_price'
+        self._current_indicators[column_name] = {}
+        self._current_indicators[column_name]['args'] = locals_data
+        self._current_indicators[column_name]['func'] = self.change_in_price
+
+        self._frame[column_name] = self._price_groups['close'].transform(
+            lambda x: x.diff()
+        )
