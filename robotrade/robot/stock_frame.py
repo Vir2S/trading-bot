@@ -41,3 +41,12 @@ class StockFrame():
         self._symbol_rolling_groups = self._symbol_groups.rolling(size)
 
         return self._symbol_rolling_groups
+
+    def create_frame(self) -> pd.DataFrame:
+
+        # Make a data frame
+        price_df = pd.DataFrame(data=self._data)
+        price_df = self._parse_datetime_column(price_df=price_df)
+        price_df = self._set_multi_index(price=price_df)
+
+        return price_df
