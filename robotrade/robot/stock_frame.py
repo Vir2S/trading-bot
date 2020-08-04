@@ -22,3 +22,13 @@ class StockFrame():
     def frame(self) -> pd.DataFrame:
         return self._frame
 
+    @property
+    def symbol_groups(self) -> DataFrameGroupBy:
+
+        self._symbol_groups = self._frame.groupby(
+            by='symbol',
+            as_index=False,
+            sort=True
+        )
+
+        return self._symbol_groups
