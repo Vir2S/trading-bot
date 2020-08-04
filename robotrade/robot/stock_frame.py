@@ -32,3 +32,12 @@ class StockFrame():
         )
 
         return self._symbol_groups
+
+    def symbol_rolling_groups(self, size: int) -> RollingGroupby:
+
+        if not self._symbol_groups:
+            self.symbol_groups
+
+        self._symbol_rolling_groups = self._symbol_groups.rolling(size)
+
+        return self._symbol_rolling_groups
