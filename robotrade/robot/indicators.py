@@ -19,9 +19,11 @@ class Indicators():
 
     def set_indicator_signals(self, indicator: str, buy: float, sell: float, condition_buy: Any, condition_sell: Any) -> None:
 
+        # If there is no signal for that indicator set a template
         if indicator not in self._indicator_signals:
             self._indicator_signals[indicator] = {}
 
+        # Modify the signal
         self._indicator_signals[indicator]['buy'] = buy
         self._indicator_signals[indicator]['sell'] = sell
         self._indicator_signals[indicator]['buy_operator'] = condition_buy
