@@ -2,7 +2,7 @@ import operator
 import numpy as np
 import pandas as pd
 
-from typing import List, Dict, Union, Optional, Tuple
+from typing import List, Dict, Union, Optional, Tuple, Any
 
 from stock_frame import StockFrame
 
@@ -16,3 +16,14 @@ class Indicators():
         self._current_indicators = {}
         self._indicator_signals = {}
         self._frame = self._stock_frame.frame
+
+    def set_indicator_signals(self, indicator: str, buy: float, sell: float, condition_buy: Any, condition_sell: Any) -> None:
+
+        if indicator not in self._indicator_signals:
+            self._indicator_signals[indicator] = {}
+
+        self._indicator_signals[indicator]['buy'] = buy
+        self._indicator_signals[indicator]['sell'] = sell
+        self._indicator_signals[indicator]['buy_operator'] = condition_buy
+        self._indicator_signals[indicator]['sell_operator'] = condition_sell
+
