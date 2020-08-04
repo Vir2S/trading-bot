@@ -17,3 +17,8 @@ class StockFrame():
         self._frame: pd.DataFrame = self.create_frame()
         self._symbol_groups: DataFrameGroupBy = None
         self._symbol_rolling_groups: RollingGroupby = None
+
+    @property
+    def frame(self) -> pd.DataFrame:
+        return self._frame
+
