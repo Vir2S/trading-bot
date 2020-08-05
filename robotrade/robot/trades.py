@@ -129,3 +129,9 @@ class Trades():
         self.asset_type = asset_type
 
         return leg
+
+    def good_till_cancel(self, cancel_time: datetime) -> None:
+
+        self.order['duration'] = 'GOOD_TILL_CANCEL'
+        self.order['cancelTime'] = cancel_time.isoformat()
+
