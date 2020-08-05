@@ -122,3 +122,20 @@ class Indicators():
         )
 
         return self._frame
+
+    def ema(self,period: int, alpha: float = 0.0) -> pd.DataFrame:
+
+        locals_data = locals()
+        del locals_data['self']
+
+        column_name = 'ema'
+        self._current_indicators[column_name] = {}
+        self._current_indicators[column_name]['args'] = locals_data
+        self._current_indicators[column_name]['func'] = self.ema
+
+        # Add the EMA
+        self._frame[column_name] = self._price_groups['close'].transform(
+            lambda x: x.ewm(span=period).mean()
+        )
+
+        return self._frame
