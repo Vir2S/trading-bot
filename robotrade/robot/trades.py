@@ -82,3 +82,29 @@ class Trades():
             self.order['stopPriceLinkType'] = ''
             self.order['stopPriceOffset'] = 0.00
             self.order['stopType'] = 'STANDARD'
+
+        self.enter_or_exit = enter_or_exit
+        self.side = side
+        self.order_type = order_type
+        self.price = price
+
+        # Store important info for later use
+        if order_type == 'stop':
+            self.stop_price = price
+        elif order_type == 'stop_lmt':
+            self.stop_price = price
+            self.stop_limit_price = stop_limit_price
+        else:
+            self.stop_price = 0.00
+
+        if self.enter_or_exit == 'enter':
+            self.enter_or_exit_opposite = 'exit'
+        elif self.enter_or_exit == 'exit':
+            self.enter_or_exit_opposite = 'enter'
+
+        if self.side == 'long':
+            self.side_opposite = 'short'
+        elif self.side == 'short':
+            self.side_opposite = 'long'
+
+        return self.order
