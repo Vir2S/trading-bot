@@ -155,3 +155,43 @@ class Trades():
 
         if not stop_limit:
             self.add_stop_loss(stop_size=profit_size, percentage=percentage)
+
+    def add_stop_loss(self, stop_size: float, percentage: bool = False) -> bool:
+
+        if not self._triggered_added:
+            self._convert_to_trigger()
+
+        if self.order_type == 'mkt':
+            pass
+        elif self.order_type == 'lmt':
+            price = self.price
+
+        if percentage:
+            adjustment = 1.0 - stop_size
+            new_price = self._calculate_new_price(price=price, adjustment=adjustment, percentage=True)
+        else:
+            adjustment = - stop_size
+            new_price = self._calculate_new_price(price=price, adjustment=adjustment, percentage=False)
+
+        stop_loss_order = {
+            "orderType": "STOP",
+            "session": "NORMAL",
+            "duration": "DAY",
+            "stopPrice": new_price,
+            "orderStrategyType": "SINGLE",
+            "orderLegCollection": [
+                {
+                    "instruction": self.order_instructions[self.enter_or_exit_opposite][self.side],
+                    "quantity": self.order_size,
+                    "instrument": {
+                        "symbol": self.symbol,
+                        "assetType": self.asset_type
+                    }
+                }
+            ]
+        }
+
+        self.stop_loss_order = stop_loss_order
+        self.order['childOrderStrategies'].append(self.stop_loss_order)
+
+        return True
