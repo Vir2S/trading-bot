@@ -139,3 +139,18 @@ class Indicators():
         )
 
         return self._frame
+
+    def refresh(self):
+
+        # First update the groups
+        self._price_groups = self._stock_frame.symbol_groups
+
+        # Loop through all the stored indicators
+        for indicator in self._current_indicators:
+
+            indicator_arguments = self._current_indicators[indicator]['args']
+            indicator_function = self._current_indicators[indicator]['func']
+
+            # Update the columns
+            indicator_function(**indicator_arguments)
+
