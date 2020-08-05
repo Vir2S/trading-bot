@@ -135,3 +135,13 @@ class Trades():
         self.order['duration'] = 'GOOD_TILL_CANCEL'
         self.order['cancelTime'] = cancel_time.isoformat()
 
+    def modify_side(self, side: Optional[str], order_leg_id: int = 0) -> None:
+
+        if side and side not in ['buy', 'sell', 'buy_to_cover', 'sell_short']:
+            raise ValueError('You passed through an invalid side')
+
+        if side:
+            self.side['orderLegCollection'][order_leg_id]['instructions'] = side.upper()
+        else:
+            self.side['orderLegCollection'][order_leg_id]['instructions'] = \
+                self.order_instructions[self.enter_or_exit][self.side_opposite]
