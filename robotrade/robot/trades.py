@@ -108,3 +108,24 @@ class Trades():
             self.side_opposite = 'long'
 
         return self.order
+
+    def instrument(
+            self,
+            symbol: str,
+            quantity: int,
+            asset_type: str,
+            sub_asset_type: str = None,
+            order_leg_id: int = 0
+    ) -> Dict:
+
+        leg = self.order['orderLegCollection'][order_leg_id]
+
+        leg['instrument']['symbol'] = symbol
+        leg['instrument']['assetType'] = asset_type
+        leg['quantity'] = quantity
+
+        self.order_size = quantity
+        self.symbol = symbol
+        self.asset_type = asset_type
+
+        return leg
