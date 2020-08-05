@@ -251,3 +251,17 @@ class Trades():
         self.order['childOrderStrategies'].append(self.stop_limit_order)
 
         return True
+
+    def _calculate_new_price(self, price: float, adjustment: float, percentage: bool) -> float:
+
+        if percentage:
+            new_price = price * adjustment
+        else:
+            new_price = price + adjustment
+
+        if new_price < 1:
+            new_price = round(new_price, 4)
+        else:
+            new_price = round(new_price, 2)
+
+        return new_price
