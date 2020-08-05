@@ -154,3 +154,8 @@ class Indicators():
             # Update the columns
             indicator_function(**indicator_arguments)
 
+    def check_signals(self) -> Union[pd.DataFrame, None]:
+
+        signals_df = self._stock_frame.check_signals(indicators=self._indicator_signals)
+
+        return signals_df
