@@ -145,3 +145,13 @@ class Trades():
         else:
             self.side['orderLegCollection'][order_leg_id]['instructions'] = \
                 self.order_instructions[self.enter_or_exit][self.side_opposite]
+
+    def add_box_range(self, profit_size: float = 0.00, percentage: bool = False, stop_limit: bool = False):
+
+        if not self._triggered_added:
+            self._convert_to_trigger()
+
+        self.add_take_profit(profit_size=profit_size, percentage=percentage)
+
+        if not stop_limit:
+            self.add_stop_loss(stop_size=profit_size, percentage=percentage)
