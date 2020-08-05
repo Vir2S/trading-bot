@@ -82,5 +82,3 @@ class Trades():
             self.order['stopPriceLinkType'] = ''
             self.order['stopPriceOffset'] = 0.00
             self.order['stopType'] = 'STANDARD'
-
-
