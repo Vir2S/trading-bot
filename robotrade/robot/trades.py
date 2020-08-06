@@ -334,3 +334,16 @@ class Trades():
 
         self._order_response = order_response_dict
 
+    def _generate_order_id(self) -> str:
+
+        if self.order:
+
+            order_id = '{symbol}_{side}_{enter_or_exit}_{timestamp}'
+            order_id = order_id.format(
+                symbol=self.symbol,
+                side=self.side,
+                enter_or_exit = self.enter_or_exit,
+                timestamp=datetime.now().timestamp()
+            )
+
+        return order_id
