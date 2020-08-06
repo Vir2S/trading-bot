@@ -346,4 +346,7 @@ class Trades():
                 timestamp=datetime.now().timestamp()
             )
 
-        return order_id
+            return order_id
+        else:
+            return ''
+
