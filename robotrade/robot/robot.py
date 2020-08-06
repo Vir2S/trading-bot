@@ -19,7 +19,8 @@ class Robot():
             client_id: str,
             redirect_uri: str,
             credentials_path: str = None,
-            trading_account: str = None
+            trading_account: str = None,
+            paper_trading: bool = True
     ) -> None:
 
         self.client_id: str = client_id
@@ -29,6 +30,7 @@ class Robot():
         self.session: TDClient = self._create_session()
         self.historical_prices: dict = {}
         self.stock_frame = None
+        self.paper_trading = paper_trading
 
     def _create_session(self) -> TDClient:
 
