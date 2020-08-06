@@ -383,3 +383,8 @@ class Trades():
             order_leg_colleciton.insert(order_leg_id, leg)
 
         return self.order['orderLegCollection']
+
+    @property
+    def number_of_legs(self) -> int:
+
+        return len(self.order['orderLegCollection'])
