@@ -317,3 +317,9 @@ class Trades():
             self.order['childOrderStrategies'] = []
             self._triggered_added = True
 
+    def modify_session(self, session: str) -> None:
+
+        if session in ['am', 'pm', 'normal', 'seamless']:
+            self.order['session'] = session.upper()
+        else:
+            raise ValueError('Invalid session')
