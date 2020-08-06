@@ -350,3 +350,36 @@ class Trades():
         else:
             return ''
 
+    def add_leg(
+            self,
+            order_leg_id: int,
+            symbol: str,
+            quantity: int,
+            asset_type: str,
+            sub_asset_type: str = None
+    ) -> List[Dict]:
+
+        # Define the leg
+        leg = {}
+        leg['instrument']['symbol'] = symbol
+        leg['instrument']['assetType'] = asset_type
+        leg['quantity'] = quantity
+
+        if sub_asset_type:
+            leg['instrument']['subAssetType'] = sub_asset_type
+
+        # If 0, call instrument
+        if order_leg_id == 0:
+            self.instrument(
+                symbol=symbol,
+                asset_type=asset_type,
+                quantity=quantity,
+                sub_asset_type=sub_asset_type,
+                order_leg_id=0
+            )
+        else:
+            # Insert it
+            order_leg_colleciton: list = self.order['orderLegCollection']
+            order_leg_colleciton.insert(order_leg_id, leg)
+
+        return self.order['orderLegCollection']
