@@ -323,3 +323,14 @@ class Trades():
             self.order['session'] = session.upper()
         else:
             raise ValueError('Invalid session')
+
+    @property
+    def order_response(self) -> dict:
+
+        return self._order_response
+
+    @order_response.setter
+    def order_response(self, order_response_dict: dict) -> None:
+
+        self._order_response = order_response_dict
+
