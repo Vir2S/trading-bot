@@ -309,3 +309,11 @@ class Trades():
         self.order['childOrderStrategies'].append(self.take_profit_order)
 
         return True
+
+    def _convert_to_trigger(self):
+
+        if self.order and self._triggered_added == False:
+            self.order['orderStrategyType'] = 'TRIGGER'
+            self.order['childOrderStrategies'] = []
+            self._triggered_added = True
+
