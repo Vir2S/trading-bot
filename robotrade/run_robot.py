@@ -24,5 +24,6 @@ robotrade = Robot(
     client_id=CLIENT_ID,
     redirect_uri=REDIRECT_URI,
     credentials_path=CREDENTIALS_PATH,
-    trading_account=ACCOUNT_NUMBER
+    trading_account=ACCOUNT_NUMBER,
+    paper_trading=True
 )
