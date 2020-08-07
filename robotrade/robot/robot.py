@@ -11,6 +11,7 @@ from typing import List
 from typing import Dict
 from typing import Union
 
+from portfolio import Portfolio
 
 class Robot():
 
@@ -82,6 +83,12 @@ class Robot():
             return False
 
     def create_portfolio(self):
+
+        # Initialize a new Portfolio object
+        self.portfolio = Portfolio(account_number=self.trading_account)
+
+        # Assign the client
+
         pass
 
     def create_trade(self):
