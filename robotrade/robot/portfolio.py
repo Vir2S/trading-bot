@@ -102,7 +102,7 @@ class Portfolio():
             td_client {TDClient} -- An authenticated session with the TD API
         """
 
-        self._td_client: TDClient = td_client
+        self._td_client = td_client
 
     def total_allocation(self):
         pass
