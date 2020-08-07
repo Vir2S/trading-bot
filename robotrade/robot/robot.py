@@ -99,7 +99,14 @@ class Robot():
         pass
 
     def grab_current_quotes(self) -> dict:
-        pass
+
+        # Grab all the symbols
+        symbols = self.portfolio.positions.keys()
+
+        # Grab the quotes
+        quotes = self.session.get_quotes(instruments=list(symbols))
+
+        return quotes
 
     def grab_historical_prices(self) -> List[Dict]:
         pass
