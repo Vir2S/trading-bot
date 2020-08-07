@@ -88,8 +88,9 @@ class Robot():
         self.portfolio = Portfolio(account_number=self.trading_account)
 
         # Assign the client
+        self.portfolio.td_client = self.session
 
-        pass
+        return self.portfolio
 
     def create_trade(self):
         pass
