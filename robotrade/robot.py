@@ -10,6 +10,7 @@ from datetime import timezone
 from typing import List
 from typing import Dict
 from typing import Union
+from typing import Optional
 
 from robotrade.portfolio import Portfolio
 from robotrade.stock_frame import StockFrame
@@ -99,8 +100,20 @@ class Robot():
     @property
     def regular_market_open(self) -> bool:
 
-        market_start_time = datetime.now().replace(hour=13, minute=30, second=00, tzinfo=timezone.utc).timestamp()
-        market_end_time = datetime.now().replace(hour=20, minute=00, second=00, tzinfo=timezone.utc).timestamp()
+        market_start_time = datetime.now().replace(
+            hour=13,
+            minute=30,
+            second=00,
+            tzinfo=timezone.utc
+        ).timestamp()
+
+        market_end_time = datetime.now().replace(
+            hour=20,
+            minute=00,
+            second=00,
+            tzinfo=timezone.utc
+        ).timestamp()
+
         right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
 
         if market_end_time >= right_now >= market_start_time:
@@ -137,5 +150,54 @@ class Robot():
 
         return quotes
 
-    def grab_historical_prices(self) -> List[Dict]:
-        pass
+    def grab_historical_prices(
+            self,
+            start: datetime,
+            end: datetime,
+            bar_size: int = 1,
+            bar_type: str = 'minute',
+            symbols: Optional[List[str]] = None
+    ) -> List[dict]:
+
+        self.bar_size = bar_size
+        self.bar_type = bar_type
+
+        start = str(milliseconds_since_epoch(dt_object=start))
+        end = str(milliseconds_since_epoch(dt_object=end))
+
+        new_prices = []
+
+        if not symbols:
+            symbols = self.portfolio.positions
+
+        for symbol in symbols:
+
+            historical_price_response = self.session.get_price_history(
+                symbol=symbol,
+                period_type='day',
+                start_date=start,
+                end_date=end,
+                frequency_type=bar_type,
+                frequency=bar_size,
+                extended_hours=True
+            )
+
+            self.historical_prices[symbol] = {}
+            self.historical_prices[symbol]['candles'] = historical_price_response['candles']
+
+            for candle in historical_price_response['candles']:
+
+                new_price_mini_dict = {}
+                new_price_mini_dict['symbol'] = symbol
+                new_price_mini_dict['open'] = candle['open']
+                new_price_mini_dict['close'] = candle['close']
+                new_price_mini_dict['high'] = candle['high']
+                new_price_mini_dict['low'] = candle['low']
+                new_price_mini_dict['volume'] = candle['low']
+                new_price_mini_dict['datetime'] = candle['datetime']
+
+                new_prices.append(new_price_mini_dict)
+
+        self.historical_prices['aggregated'] = new_prices
+
+        return self.historical_prices
