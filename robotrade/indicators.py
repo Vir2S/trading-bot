@@ -4,7 +4,7 @@ import pandas as pd
 
 from typing import List, Dict, Union, Optional, Tuple, Any
 
-from stock_frame import StockFrame
+from robotrade.stock_frame import StockFrame
 
 
 class Indicators():

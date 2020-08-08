@@ -11,7 +11,8 @@ from typing import List
 from typing import Dict
 from typing import Union
 
-from portfolio import Portfolio
+from robotrade.portfolio import Portfolio
+
 
 class Robot():
 
