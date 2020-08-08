@@ -51,4 +51,36 @@ multi_position = {
 
 # Add those positions to the Portfolio
 new_positions = robo_trade.portfolio.add_positions(positions=multi_position)
-print(new_positions)
+pprint.pprint(new_positions)
+
+# Add a single position to the portfolio
+robo_trade.portfolio.add_position(
+    symbol='MSFT',
+    quantity=10,
+    purchase_price=10.00,
+    purchase_date='2020-08-08',
+    asset_type='equity'
+)
+pprint.pprint(robo_trade.portfolio.positions)
+
+# Check to see if the regular market is open
+if robo_trade.regular_market_open:
+    print('Regular Market Open')
+else:
+    print('Regular Market Not Open')
+
+# Check to see if the pre market is open
+if robo_trade.pre_market_open:
+    print('Pre Market Open')
+else:
+    print('Pre Market Not Open')
+
+# Check to see if the post market is open
+if robo_trade.post_market_open:
+    print('Post Market Open')
+else:
+    print('Post Market Not Open')
+
+# Grab the current quotes in portfolio
+current_quotes = robo_trade.grab_current_quotes()
+pprint.pprint(current_quotes)
