@@ -80,3 +80,7 @@ if robo_trade.post_market_open:
     print('Post Market Open')
 else:
     print('Post Market Not Open')
+
+# Grab the current quotes in portfolio
+current_quotes = robo_trade.grab_current_quotes()
+pprint.pprint(current_quotes)
