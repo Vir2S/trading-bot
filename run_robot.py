@@ -84,3 +84,7 @@ else:
 # Grab the current quotes in portfolio
 current_quotes = robo_trade.grab_current_quotes()
 pprint.pprint(current_quotes)
+
+# Define date range
+end_date = datetime.today()
+start_date = end_date - timedelta(days=30)
