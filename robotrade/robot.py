@@ -12,6 +12,7 @@ from typing import Dict
 from typing import Union
 
 from robotrade.portfolio import Portfolio
+from robotrade.stock_frame import StockFrame
 
 
 class Robot():
@@ -120,8 +121,11 @@ class Robot():
     def create_trade(self):
         pass
 
-    def create_stock_frame(self):
-        pass
+    def create_stock_frame(self, data: List[dict]) -> StockFrame:
+
+        self.stock_frame = StockFrame(data=data)
+
+        return self.stock_frame
 
     def grab_current_quotes(self) -> dict:
 
