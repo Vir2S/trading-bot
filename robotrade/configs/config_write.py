@@ -8,5 +8,5 @@ config.set('main', 'REDIRECT_URI', '')
 config.set('main', 'JSON_PATH', '')
 config.set('main', 'ACCOUNT_NUMBER', '')
 
-with open('config/config.ini', 'w') as f:
+with open('config.ini', 'w') as f:
     config.write(f)
