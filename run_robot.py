@@ -51,4 +51,16 @@ multi_position = {
 
 # Add those positions to the Portfolio
 new_positions = robo_trade.portfolio.add_positions(positions=multi_position)
-print(new_positions)
+pprint.pprint(new_positions)
+
+# Add a single position to the portfolio
+robo_trade.portfolio.add_position(
+    symbol='MSFT',
+    quantity=10,
+    purchase_price=10.00,
+    purchase_date='2020-08-08',
+    asset_type='equity'
+)
+
+pprint.pprint(robo_trade.portfolio.positions)
+
