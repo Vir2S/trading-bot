@@ -52,21 +52,19 @@ class Robot():
     @property
     def pre_market_open(self) -> bool:
 
-        pre_market_start_time = datetime.now().replace(
+        pre_market_start_time = datetime.utcnow().replace(
             hour=12,
             minute=00,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        market_start_time = datetime.now().replace(
+        market_start_time = datetime.utcnow().replace(
             hour=13,
             minute=30,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+        right_now = datetime.utcnow().replace().timestamp()
 
         if market_start_time >= right_now >= pre_market_start_time:
             return True
@@ -76,21 +74,19 @@ class Robot():
     @property
     def post_market_open(self) -> bool:
 
-        post_market_end_time = datetime.now().replace(
+        post_market_end_time = datetime.utcnow().replace(
             hour=22,
             minute=30,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        market_end_time = datetime.now().replace(
+        market_end_time = datetime.utcnow().replace(
             hour=20,
             minute=00,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+        right_now = datetime.utcnow().replace().timestamp()
 
         if market_end_time >= right_now >= post_market_end_time:
             return True
@@ -100,21 +96,19 @@ class Robot():
     @property
     def regular_market_open(self) -> bool:
 
-        market_start_time = datetime.now().replace(
+        market_start_time = datetime.utcnow().replace(
             hour=13,
             minute=30,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        market_end_time = datetime.now().replace(
+        market_end_time = datetime.utcnow().replace(
             hour=20,
             minute=00,
-            second=00,
-            tzinfo=timezone.utc
+            second=00
         ).timestamp()
 
-        right_now = datetime.now().replace(tzinfo=timezone.utc).timestamp()
+        right_now = datetime.utcnow().replace().timestamp()
 
         if market_end_time >= right_now >= market_start_time:
             return True

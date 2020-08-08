@@ -96,3 +96,9 @@ historical_prices = robo_trade.grab_historical_prices(
     bar_size=1,
     bar_type='minute'
 )
+
+# Convert the data into a StockFrame
+stock_frame = robo_trade.create_stock_frame(data=historical_prices['aggregated'])
+
+# Print the head of StockFrame
+pprint.pprint(stock_frame.frame.head(n=20))
