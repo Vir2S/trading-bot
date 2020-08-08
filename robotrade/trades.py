@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import List, Dict, Union, Optional
 
 
-class Trades():
+class Trade():
 
     def __init__(self):
 
