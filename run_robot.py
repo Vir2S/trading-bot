@@ -88,3 +88,11 @@ pprint.pprint(current_quotes)
 # Define date range
 end_date = datetime.today()
 start_date = end_date - timedelta(days=30)
+
+# Grab the historical prices
+historical_prices = robo_trade.grab_historical_prices(
+    start=start_date,
+    end=end_date,
+    bar_size=1,
+    bar_type='minute'
+)
