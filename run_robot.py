@@ -102,3 +102,34 @@ stock_frame = robo_trade.create_stock_frame(data=historical_prices['aggregated']
 
 # Print the head of StockFrame
 pprint.pprint(stock_frame.frame.head(n=20))
+
+# Create a new Trade Object.
+new_trade = robo_trade.create_trade(
+    trade_id='long_msft',
+    enter_or_exit='enter',
+    long_or_short='long',
+    order_type='lmt',
+    price=150.00
+)
+
+# Make it Good Till Cancel.
+new_trade.good_till_cancel(cancel_time=datetime.now() + timedelta(minutes=90))
+
+# Change the session
+new_trade.modify_session(session='am')
+
+# Add an Order Leg.
+new_trade.instrument(
+    symbol='MSFT',
+    quantity=2,
+    asset_type='EQUITY'
+)
+
+# Add a Stop Loss Order with the Main Order.
+new_trade.add_stop_loss(
+    stop_size=.10,
+    percentage=False
+)
+
+# Print out the order.
+pprint.pprint(new_trade.order)
