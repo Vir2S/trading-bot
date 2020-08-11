@@ -147,3 +147,10 @@ indicator_client.sma(period=200)
 indicator_client.ema(period=50)
 
 # Add a signal to check for
+indicator_client.set_indicator_signals(
+    indicator='rsi',
+    buy=40.0,
+    sell=20.0,
+    condition_buy=operator.ge,
+    condition_sell=operator.le
+)
