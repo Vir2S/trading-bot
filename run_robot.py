@@ -154,3 +154,11 @@ indicator_client.set_indicator_signals(
     condition_buy=operator.ge,
     condition_sell=operator.le
 )
+
+# Define a trade dictionary
+trades_dict = {
+    'MSFT': {
+        'trade_frame': robo_trade.trades['long_msft'],
+        'trade_id': robo_trade.trades['long_msft'].trade_id
+    }
+}
