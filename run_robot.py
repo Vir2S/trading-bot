@@ -133,3 +133,17 @@ new_trade.add_stop_loss(
 
 # Print out the order.
 pprint.pprint(new_trade.order)
+
+# Create a new indicator client
+indicator_client = Indicators(price_data_frame=stock_frame)
+
+# Add the RSI indicator
+indicator_client.rsi(period=14)
+
+# Add a 200-day simple moving average
+indicator_client.sma(period=200)
+
+# Add a 50-day exponential moving average
+indicator_client.ema(period=50)
+
+# Add a signal to check for
