@@ -1,3 +1,7 @@
+import json
+import time as time_true
+import pprint
+import pathlib
 import pandas as pd
 
 from td.client import TDClient
@@ -6,6 +10,7 @@ from td.utils import milliseconds_since_epoch
 from datetime import datetime
 from datetime import time
 from datetime import timezone
+from datetime import timedelta
 
 from typing import List
 from typing import Dict
@@ -220,3 +225,59 @@ class Robot():
         self.historical_prices['aggregated'] = new_prices
 
         return self.historical_prices
+
+    @property
+    def get_latest_bar(self) -> List[dict]:
+
+        bar_size = self._bar_size
+        bar_type = self._bar_type
+
+        # Define data range
+        end_date = datetime.today()
+        start_date = end_date - timedelta(minutes=15)
+
+        start = str(milliseconds_since_epoch(dt_object=start_date))
+        end = str(milliseconds_since_epoch(dt_object=end_date))
+
+        latest_prices = []
+
+        for symbol in self.portfolio.positions:
+
+            historical_price_response = self.session.get_price_history(
+                symbol=symbol,
+                period_type='day',
+                start_date=start,
+                end_date=end,
+                frequency_type=bar_type,
+                frequency=bar_size,
+                extended_hours=True
+            )
+
+            if 'error' in historical_price_response:
+
+                time_true.sleep(2)
+
+                historical_price_response = self.session.get_price_history(
+                    symbol=symbol,
+                    period_type='day',
+                    start_date=start,
+                    end_date=end,
+                    frequency_type=bar_type,
+                    frequency=bar_size,
+                    extended_hours=True
+                )
+
+            for candle in historical_price_response['candles'][-1:]:
+
+                new_price_mini_dict = {}
+                new_price_mini_dict['symbol'] = symbol
+                new_price_mini_dict['open'] = candle['open']
+                new_price_mini_dict['close'] = candle['close']
+                new_price_mini_dict['high'] = candle['high']
+                new_price_mini_dict['low'] = candle['low']
+                new_price_mini_dict['volume'] = candle['low']
+                new_price_mini_dict['datetime'] = candle['datetime']
+
+                latest_prices.append(new_price_mini_dict)
+
+        return latest_prices
