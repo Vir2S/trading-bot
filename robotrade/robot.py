@@ -281,3 +281,36 @@ class Robot():
                 latest_prices.append(new_price_mini_dict)
 
         return latest_prices
+
+    def wait_till_next_bar(self, last_bar_timestamp: pd.DatetimeIndex) -> None:
+
+        last_bar_time = last_bar_timestamp.to_pydatetime()[0].replace(tzinfo=timezone.utc)
+        next_bar_time = last_bar_time + timedelta(seconds=60)
+        curr_bar_time = datetime(tz=timezone.utc)
+
+        last_bar_timestamp = int(last_bar_time.timestamp())
+        next_bar_timestamp = int(next_bar_time.timestamp())
+        curr_bar_timestamp = int(curr_bar_time.timestamp())
+
+        _time_to_wait_bar = next_bar_timestamp - last_bar_timestamp
+        time_to_wait_now = next_bar_timestamp - curr_bar_timestamp
+
+        if time_to_wait_now < 0:
+            time_to_wait_now = 0
+
+        print("="*80)
+        print("Pausing for the next bar")
+        print("-"*80)
+        print("Curr Time: {time_curr}".format(
+            time_curr=curr_bar_time.strftime("%Y-%m-%d %H:%M:%S")
+            )
+        )
+        print("Next Time: {time_next}".format(
+            time_next=next_bar_time.strftime("%Y-%m-%d %H:%M:%S")
+            )
+        )
+        print("Sleep Time: {seconds}".format(seconds=time_to_wait_now))
+        print("-"*80)
+        print('')
+
+        time_true.sleep(time_to_wait_now)
