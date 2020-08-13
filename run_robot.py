@@ -162,3 +162,14 @@ trades_dict = {
         'trade_id': robo_trade.trades['long_msft'].trade_id
     }
 }
+
+while True:
+
+    # Grab the latest bar
+    latest_bar = robo_trade.get_latest_bar()
+
+    # Add those bars to the StockFrame
+    stock_frame.add_rows(data=latest_bar)
+
+    # Refresh the indicators
+    indicator_client.refresh()
